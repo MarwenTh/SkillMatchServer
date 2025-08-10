@@ -23,7 +23,23 @@ To start the development server with hot reload:
 npm run dev
 ```
 
-The server will start on `http://localhost:3000`
+The server will start on `http://localhost:3001`
+
+### Database Migrations
+
+To run database migrations manually:
+
+```bash
+npm run migrate
+```
+
+This will create all necessary tables and insert default data.
+
+**Smart Migration Behavior:**
+
+- Tables are only created if they don't already exist
+- Server startup skips migrations if tables are present
+- Use `npm run migrate -- --force` to run migrations even if tables exist
 
 ## Production
 
@@ -71,11 +87,17 @@ The `/api/send-mail` endpoint accepts POST requests with the following JSON body
 
 ```
 src/
-├── index.ts          # Main server file
-├── routes/           # Route handlers (to be added)
-├── controllers/      # Business logic (to be added)
-├── models/           # Data models (to be added)
-└── middleware/       # Custom middleware (to be added)
+├── index.ts              # Main server file
+├── lib/
+│   ├── database.ts       # Database connection and pool
+│   ├── migrations.ts     # Database table creation queries
+│   └── db-utils.ts       # Database query utilities
+├── routes/               # Route handlers
+├── controllers/          # Business logic
+├── services/             # Service layer (email, etc.)
+├── mails/                # Email templates
+├── scripts/              # Utility scripts
+└── middleware/           # Custom middleware (to be added)
 ```
 
 ## Environment Variables

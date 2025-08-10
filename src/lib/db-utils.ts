@@ -11,7 +11,7 @@ export const userQueries = {
     lastName?: string
   ) => {
     const query = `
-      INSERT INTO users (email, password_hash, first_name, last_name)
+      INSERT INTO users (email, password, first_name, last_name)
       VALUES ($1, $2, $3, $4)
       RETURNING id, email, first_name, last_name, is_verified, created_at;
     `;
